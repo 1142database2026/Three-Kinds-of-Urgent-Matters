@@ -146,6 +146,41 @@
 
     @media (max-width:720px) { .store-card { flex-direction:column; } .store-right { width:100%; flex-direction:row; justify-content:space-between; align-items:center; } }
   </style>
+	<!-- iOS 安裝提示引導 -->
+<div id="ios-install-prompt" style="display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 350px; background: #22263a; color: white; padding: 15px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 9999; border: 1px solid #4f8ef7; animation: bounce 2s infinite;">
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <div style="font-size: 24px;">📲</div>
+    <div style="font-size: 14px; line-height: 1.4;">
+      想更方便使用嗎？點擊下方的<strong>「分享」按鈕</strong> <img src="https://wikimedia.org" width="16" style="vertical-align: middle;">，然後選擇<strong>「加入主畫面」</strong>。
+    </div>
+    <button onclick="this.parentElement.parentElement.style.display='none'" style="background: none; border: none; color: #7a82a0; font-size: 20px; cursor: pointer;">✕</button>
+  </div>
+  <!-- 小箭頭指向分享按鈕 -->
+  <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid #22263a;"></div>
+</div>
+
+<style>
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+  40% {transform: translateX(-50%) translateY(-10px);}
+  60% {transform: translateX(-50%) translateY(-5px);}
+}
+</style>
+	<script>
+  function isIos() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+  }
+
+  function isInStandaloneMode() {
+    return ('standalone' in window.navigator) && (window.navigator.standalone);
+  }
+
+  // 檢查是否該顯示提示
+  if (isIos() && !isInStandaloneMode()) {
+    document.getElementById('ios-install-prompt').style.display = 'block';
+  }
+</script>
 </head>
 <body>
 <header><div class="logo-icon">🏪</div><h1>人有三急<span>Can't Hold IT Anymore!!</span></h1></header>

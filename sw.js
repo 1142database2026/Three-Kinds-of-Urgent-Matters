@@ -1,22 +1,23 @@
 const CACHE_NAME = "pwa-cache-v1";
+const urlsToCache = [
+  "./",
+  "./index-1.html",
+  "./style.css",
+  "./script.js"
+];
 
+// 安裝時快取
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll([
-        "./",
-        "./index-1.html"
-      ]);
-    })
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
   );
 });
 
+// 請求攔截（離線用）
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
+    caches.match(event.request)
+      .then(response => response || fetch(event.request))
   );
-});
-
 });

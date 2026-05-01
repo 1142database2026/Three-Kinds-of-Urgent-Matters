@@ -167,27 +167,19 @@
 }
 </style>
 <script>
-  function showIosPrompt() {
-    const ua = window.navigator.userAgent.toLowerCase();
-    
-    // 1. 判斷是否為 iOS (iPhone/iPad)
-    const isIos = /iphone|ipad|ipod/.test(ua);
-    
-    // 2. 判斷是否已經在「主畫面模式」(Standalone)
-    const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
-    
-    // 3. 判斷是否為 LINE 或 FB 等內建瀏覽器 (排除這些，因為它們不能直接「加入主畫面」)
-    const isLine = /line/.test(ua);
-    const isFb = /fban|fbav/.test(ua);
-
-    // 只有在：是 iOS、不是主畫面模式、且不是 LINE/FB (即真正的 Safari) 時才顯示
-    if (isIos && !isInStandaloneMode && !isLine && !isFb) {
-      document.getElementById('ios-install-prompt').style.display = 'block';
-    }
+  function isIos() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
   }
 
-  // 確保 DOM 載入後再執行
-  window.onload = showIosPrompt;
+  function isInStandaloneMode() {
+    return ('standalone' in window.navigator) && (window.navigator.standalone);
+  }
+
+  // 檢查是否該顯示提示
+  if (isIos() && !isInStandaloneMode()) {
+    document.getElementById('ios-install-prompt').style.display = 'block';
+  }
 </script>
 </head>
 <body>

@@ -1,7 +1,7 @@
 {
-  "name": "Three-kinds-of-Urgent-Matters",
+  "name": "Three kinds of Urgent Matters",
   "short_name": "Urgent",
-  "start_url": "./index-1.html",
+  "start_url": "/Three-Kinds-of-Urgent-Matters/index-1.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",
